@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 // core components
 
-function InferenceTable() {
+function InferenceTable(props) {
   return (
     <Card className="shadow">
       <CardHeader className="border-0">

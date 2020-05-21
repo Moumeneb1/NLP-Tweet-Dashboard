@@ -108,6 +108,10 @@
   filter: none;
 }
 
+.menu-item-selected {
+  background-color: #4b63c4;
+}
+
 .menu-item:hover {
   background-color: #525357;
 }

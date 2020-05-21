@@ -42,6 +42,7 @@ import RangePicker from "components/RangePicker";
 import CountSlider from "components/CountSlider";
 import LangDropDawn from "components/LangDropDawn";
 import InferenceTable from "components/InferenceTable";
+import Fields_models from "assets/Data/Fields_model";
 
 class Profile extends React.Component {
   render() {
@@ -136,7 +137,7 @@ class Profile extends React.Component {
                       </h1>
                     </Col>
                     <Col lg="6">
-                      <CustomDropDown></CustomDropDown>
+                      <CustomDropDown fields={Fields_models}></CustomDropDown>
                     </Col>
                   </Row>
                   <div className="d-flex flex-row-reverse">
