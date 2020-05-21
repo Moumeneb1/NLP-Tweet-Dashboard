@@ -21,14 +21,17 @@ import {
 } from "reactstrap";
 
 function Paginations(props) {
-  const [activePage, setActivePage] = useState(1);
-
-  useEffect(() => {
-    setActivePage(activePage);
-  }, [activePage]);
-
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(props.totalPosts / props.postsPerPage); i++) {
+  const [pagesPerUI, setPagesPerUI] = useState(6);
+  for (
+    let i = props.active_page;
+    i <=
+    Math.min(
+      Math.ceil(props.totalPosts / props.postsPerPage),
+      props.active_page + pagesPerUI
+    );
+    i++
+  ) {
     pageNumbers.push(i);
   }
 
@@ -38,16 +41,15 @@ function Paginations(props) {
         className="pagination justify-content-end mb-0"
         listClassName="justify-content-end mb-0"
       >
-        {/* <PaginationItem className="disabled">
+        <PaginationItem>
           <PaginationLink
-            href="#pablo"
-            onClick={(e) => e.preventDefault()}
+            onClick={() => props.paginate(props.active_page - 1)}
             tabIndex="-1"
           >
             <i className="fas fa-angle-left" />
             <span className="sr-only">Previous</span>
           </PaginationLink>
-  </PaginationItem>*/}
+        </PaginationItem>
         {pageNumbers.map((number) => (
           <PaginationItem
             className={` ${props.active_page === number ? "active" : ""}`}
@@ -58,12 +60,12 @@ function Paginations(props) {
           </PaginationItem>
         ))}
 
-        {/* <PaginationItem>
-          <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
+        <PaginationItem>
+          <PaginationLink onClick={() => props.paginate(props.active_page + 1)}>
             <i className="fas fa-angle-right" />
             <span className="sr-only">Next</span>
           </PaginationLink>
-       </PaginationItem>*/}
+        </PaginationItem>
       </Pagination>
     </nav>
   );

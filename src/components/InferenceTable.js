@@ -19,17 +19,21 @@ import {
   Table,
   Container,
   Row,
+  Col,
+  Button,
   UncontrolledTooltip,
 } from "reactstrap";
 // core components
 import InferenceData from "assets/Data/InfereceData";
+import { CSVLink, CSVDownload } from "react-csv";
+
 import Paginations from "./Paginations";
 
 function InferenceTable(props) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(3);
+  const [postsPerPage, setPostsPerPage] = useState(7);
 
   useEffect(() => {
     setPosts(InferenceData);
@@ -48,7 +52,14 @@ function InferenceTable(props) {
   return (
     <Card className="shadow">
       <CardHeader className="border-0">
-        <h3 className="mb-0">Results</h3>
+        <Row className="align-items-center">
+          <Col xs="8">
+            <h3 className="mb-0">My account</h3>
+          </Col>
+          <Col className="text-right" xs="4">
+            <CSVLink data={InferenceData}>Export Data</CSVLink>
+          </Col>
+        </Row>
       </CardHeader>
       <Table className="align-items-center table-flush" responsive>
         <thead className="thead-light">
