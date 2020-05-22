@@ -3,14 +3,8 @@ import React, { useState } from "react";
 
 import "react-tagsinput/react-tagsinput.css"; // If using WebPack and style-loader.
 
-function KeywordInput() {
-  const [tags, SetTags] = useState([]);
-
-  function handleChange(value) {
-    SetTags(value);
-  }
-
-  return <TagsInput value={tags} onChange={handleChange} />;
+function KeywordInput(props) {
+  return <TagsInput value={props.tags} onChange={props.handleChange} />;
 }
 
 export default KeywordInput;

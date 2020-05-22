@@ -9,6 +9,7 @@ import { ReactComponent as CogIcon } from "assets/icons/cog.svg";
 import { ReactComponent as ChevronIcon } from "assets/icons/chevron.svg";
 import { ReactComponent as ArrowIcon } from "assets/icons/arrow.svg";
 import { ReactComponent as BoltIcon } from "assets/icons/bolt.svg";
+import DropdownItem from "components/DropDowns/DropdownItem";
 
 function CustomDropdown(props) {
   const [activeMenu, setActiveMenu] = useState("main");
@@ -26,30 +27,16 @@ function CustomDropdown(props) {
     setMenuHeight(height);
   }
 
-  function handleClick(props) {
-    if (props.goToMenu) {
-      setActiveMenu(props.goToMenu);
+  function handleClick(goToMenu, selectedModelPath) {
+    if (goToMenu) {
+      setActiveMenu(goToMenu);
     }
-    if (props.selectedModelPath) {
-      setSelectedModelPath(props.selectedModelPath);
+    if (selectedModelPath) {
+      setSelectedModelPath(selectedModelPath);
     } else {
       setSelectedModelPath("");
     }
-  }
-
-  function DropdownItem(props) {
-    return (
-      <a
-        className="a_dropDown menu-item font-weight-bold"
-        onClick={() => {
-          handleClick(props);
-        }}
-      >
-        <span className="icon-button">{props.leftIcon}</span>
-        {props.children}
-        <span className="icon-right">{props.rightIcon}</span>
-      </a>
-    );
+    console.log(selectedModelPath);
   }
 
   return (
@@ -69,13 +56,11 @@ function CustomDropdown(props) {
           {props.fields.map((fieled) => {
             return (
               <DropdownItem
-                leftIcon={<CogIcon />}
-                rightIcon={<ChevronIcon />}
+                rightIcon={<CaretIcon />}
                 goToMenu={fieled.name}
-              >
-                {" "}
-                {fieled.name}
-              </DropdownItem>
+                children={fieled.name}
+                handle_click={handleClick}
+              ></DropdownItem>
             );
           })}
         </div>
@@ -94,19 +79,21 @@ function CustomDropdown(props) {
               <DropdownItem
                 goToMenu="main"
                 isClass="True"
+                children="Go Back"
+                handle_click={handleClick}
                 leftIcon={<ArrowIcon />}
-              >
-                <h2>Go Back</h2>
-              </DropdownItem>
+              ></DropdownItem>
 
               {fieled.models.map((model) => {
                 return (
                   <DropdownItem
                     leftIcon=""
+                    field={fieled.name}
                     selectedModelPath={fieled.name + model.name}
-                  >
-                    {model.name}
-                  </DropdownItem>
+                    actuatalModelPath={selectedModelPath}
+                    children={model.name}
+                    handle_click={handleClick}
+                  ></DropdownItem>
                 );
               })}
             </div>

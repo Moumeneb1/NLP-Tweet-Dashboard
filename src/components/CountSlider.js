@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
 
-const CountSlider = () => {
+const CountSlider = (props) => {
   const [value, setValue] = useState(500);
 
   return (
@@ -10,8 +10,8 @@ const CountSlider = () => {
       max={3000}
       min={100}
       tooltip={"on"}
-      value={value}
-      onChange={(changeEvent) => setValue(changeEvent.target.value)}
+      value={props.value}
+      onChange={(changeEvent) => props.changeHandler(changeEvent)}
     />
   );
 };
