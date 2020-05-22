@@ -47,6 +47,11 @@ import ScrappingCard from "components/ScrappingCard";
 function ChooseModelCard(props) {
   const [pathToFieldModel, setPathToFieldModel] = useState("");
 
+  function clickHandler(FieldModel) {
+    setPathToFieldModel(FieldModel);
+    console.log(FieldModel);
+  }
+
   return (
     <Card className="bg-secondary shadow">
       <CardHeader className="bg-white border-0">
@@ -65,12 +70,23 @@ function ChooseModelCard(props) {
             </h1>
           </Col>
           <Col lg="6">
-            <CustomDropDown fields={props.Fields_models}></CustomDropDown>
+            <CustomDropDown
+              fields={props.Fields_models}
+              clickHandler={clickHandler}
+            ></CustomDropDown>
           </Col>
         </Row>
         <div className="d-flex flex-row-reverse">
           <div className="p-2">
-            <Button color="primary">Classify</Button>{" "}
+            <Button
+              color="primary"
+              disabled={!pathToFieldModel}
+              onClick={(e) => {
+                props.handleSubmit(pathToFieldModel);
+              }}
+            >
+              Classify
+            </Button>{" "}
           </div>
         </div>
       </CardBody>

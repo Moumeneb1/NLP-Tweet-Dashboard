@@ -24,7 +24,6 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 // core components
-import InferenceData from "assets/Data/InfereceData";
 import { CSVLink, CSVDownload } from "react-csv";
 
 import Paginations from "./Paginations";
@@ -36,7 +35,7 @@ function InferenceTable(props) {
   const [postsPerPage, setPostsPerPage] = useState(7);
 
   useEffect(() => {
-    setPosts(InferenceData);
+    setPosts(props.data);
   }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -47,8 +46,6 @@ function InferenceTable(props) {
     setCurrentPage(number);
   };
 
-  console.log(InferenceData);
-
   return (
     <Card className="shadow">
       <CardHeader className="border-0">
@@ -57,7 +54,7 @@ function InferenceTable(props) {
             <h3 className="mb-0">My account</h3>
           </Col>
           <Col className="text-right" xs="4">
-            <CSVLink data={InferenceData}>Export Data</CSVLink>
+            <CSVLink data={posts}>Export Data</CSVLink>
           </Col>
         </Row>
       </CardHeader>

@@ -45,6 +45,7 @@ import InferenceTable from "components/InferenceTable";
 import Fields_models from "assets/Data/Fields_model";
 import ScrappingCard from "components/ScrappingCard";
 import ChooseModelCard from "components/ChooseModelCard";
+import InferenceData from "assets/Data/InfereceData";
 
 function Profile() {
   const [scrappingID, setScrappingID] = useState(null);
@@ -54,6 +55,10 @@ function Profile() {
     console.log(endDate);
     console.log(Tags);
     console.log(countSliderValue);
+  }
+
+  function classifySubmit(path) {
+    console.log(path);
   }
 
   return (
@@ -68,14 +73,21 @@ function Profile() {
           </Col>
         </Row>
 
+        {/* Choose model Card  */}
+
         <Row className="mt-5 justify-content-center">
           <Col className="order-xl-3" xl="10">
-            <ChooseModelCard Fields_models={Fields_models}></ChooseModelCard>
+            <ChooseModelCard
+              Fields_models={Fields_models}
+              handleSubmit={classifySubmit}
+            ></ChooseModelCard>
           </Col>
         </Row>
+
+        {/* Inference Table Card */}
         <Row className="mt-5 justify-content-center">
           <Col className="order-xl-3" xl="10">
-            <InferenceTable></InferenceTable>
+            <InferenceTable data={InferenceData}></InferenceTable>
           </Col>
         </Row>
       </Container>

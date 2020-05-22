@@ -36,7 +36,7 @@ function CustomDropdown(props) {
     } else {
       setSelectedModelPath("");
     }
-    console.log(selectedModelPath);
+    props.clickHandler(selectedModelPath);
   }
 
   return (
