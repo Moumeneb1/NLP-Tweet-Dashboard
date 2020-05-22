@@ -42,45 +42,40 @@ import RangePicker from "components/RangePicker";
 import CountSlider from "components/CountSlider";
 import LangDropDawn from "components/LangDropDawn";
 import InferenceTable from "components/InferenceTable";
-import Fields_models from "assets/Data/Fields_model";
 import ScrappingCard from "components/ScrappingCard";
-import ChooseModelCard from "components/ChooseModelCard";
 
-function Profile() {
-  const [scrappingID, setScrappingID] = useState(null);
-
-  function onScrappingSubmit(startDate, endDate, Tags, countSliderValue) {
-    console.log(startDate);
-    console.log(endDate);
-    console.log(Tags);
-    console.log(countSliderValue);
-  }
+function ChooseModelCard(props) {
+  const [pathToFieldModel, setPathToFieldModel] = useState("");
 
   return (
-    <>
-      <UserHeader />
-      {/* Page content */}
-      <Container className="mt--9" fluid>
-        {/* Scrapping Card  */}
-        <Row className="mt-0 justify-content-center">
-          <Col className="order-xl-3" xl="10">
-            <ScrappingCard OnSubmit={onScrappingSubmit}></ScrappingCard>
+    <Card className="bg-secondary shadow">
+      <CardHeader className="bg-white border-0">
+        <Row className="align-items-center">
+          <Col xs="8">
+            <h3 className="mb-0">Model</h3>
           </Col>
         </Row>
-
-        <Row className="mt-5 justify-content-center">
-          <Col className="order-xl-3" xl="10">
-            <ChooseModelCard Fields_models={Fields_models}></ChooseModelCard>
+      </CardHeader>
+      <CardBody>
+        <Row>
+          <Col lg="6">
+            <h1>
+              {" "}
+              Choose between a variety of finetuned models for inference{" "}
+            </h1>
+          </Col>
+          <Col lg="6">
+            <CustomDropDown fields={props.Fields_models}></CustomDropDown>
           </Col>
         </Row>
-        <Row className="mt-5 justify-content-center">
-          <Col className="order-xl-3" xl="10">
-            <InferenceTable></InferenceTable>
-          </Col>
-        </Row>
-      </Container>
-    </>
+        <div className="d-flex flex-row-reverse">
+          <div className="p-2">
+            <Button color="primary">Classify</Button>{" "}
+          </div>
+        </div>
+      </CardBody>
+    </Card>
   );
 }
 
-export default Profile;
+export default ChooseModelCard;
