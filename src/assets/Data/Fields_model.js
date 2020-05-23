@@ -34,10 +34,10 @@ var Fields_models = [
     ],
   },
   {
-    name: "Crisis Multi Label",
+    name: "psycho_sentiment",
     models: [
       {
-        name: "bert_base_cased",
+        name: "flaubert_adapted_features",
       },
       {
         name: "flaubert_base_cased",

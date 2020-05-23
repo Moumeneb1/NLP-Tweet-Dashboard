@@ -1,24 +1,15 @@
 import { handleResponse, handleError } from "./apiUtils";
-const baseUrl = "127.0.0.1:4000" + "/authors/";
+import axios from "axios";
+const baseUrl = "127.0.0.1:4000";
 
-export function getFieldsModels() {
-  return fetch(baseUrl + "/get_FieldsModels")
-    .then(handleResponse)
-    .catch(handleError);
-}
+export function getInference(session_token, field_model_path) {
+  let [field, model_name] = field_model_path.split("/");
+  var data = {
+    session_token: session_token,
+    field: field,
+    model_name: model_name,
+  };
 
-export function getInference(datasetID, FieldModel) {
-  return fetch(baseUrl + "inference", {
-    method: "POST", // POST for create, PUT to update when id already exists.
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify("data"),
-  })
-    .then(handleResponse)
-    .catch(handleError);
-}
-
-export function deleteAuthor(authorId) {
-  return fetch(baseUrl + authorId, { method: "DELETE" })
-    .then(handleResponse)
-    .catch(handleError);
+  console.log(JSON.stringify(data));
+  return axios.post("http://localhost:4000/api/predict_dataframe", data);
 }

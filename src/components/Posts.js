@@ -26,11 +26,14 @@ function Posts(props) {
       {props.posts.map((post) => (
         <tr>
           <th scope="row">
-            <span className="mb-0 text-sm">{post.tweet_text}</span>
+            <span className="mb-0 text-sm">{post.text}</span>
           </th>
           <td>
-            <a href={post.tweet_link} className="badge-dot mr-4">
-              {post.tweet_id}
+            <a
+              href={"https://www.twiter.com/" + post.url}
+              className="badge-dot mr-4"
+            >
+              {post.id}
             </a>
           </td>
           <td>

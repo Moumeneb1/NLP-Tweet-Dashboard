@@ -35,8 +35,11 @@ function InferenceTable(props) {
   const [postsPerPage, setPostsPerPage] = useState(7);
 
   useEffect(() => {
-    setPosts(props.data);
-  }, []);
+    if (props.data) {
+      console.log(props.data[0]);
+      setPosts(props.data);
+    }
+  }, [props.data]);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;

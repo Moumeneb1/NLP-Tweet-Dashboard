@@ -89,7 +89,7 @@ function CustomDropdown(props) {
                   <DropdownItem
                     leftIcon=""
                     field={fieled.name}
-                    selectedModelPath={fieled.name + model.name}
+                    selectedModelPath={fieled.name + "/" + model.name}
                     actuatalModelPath={selectedModelPath}
                     children={model.name}
                     handle_click={handleClick}

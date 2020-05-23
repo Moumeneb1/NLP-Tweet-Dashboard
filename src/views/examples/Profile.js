@@ -17,6 +17,7 @@
 */
 import React, { useState } from "react";
 import CustomDropDown from "components/DropDowns/CustomDropDown";
+import { getInference } from "api/InferenceAPI";
 
 // reactstrap components
 import {
@@ -46,19 +47,31 @@ import Fields_models from "assets/Data/Fields_model";
 import ScrappingCard from "components/ScrappingCard";
 import ChooseModelCard from "components/ChooseModelCard";
 import InferenceData from "assets/Data/InfereceData";
+import { getTweets } from "api/scrapAPI";
 
 function Profile() {
   const [scrappingID, setScrappingID] = useState(null);
+  const [inferenceData, setInferenceData] = useState(null);
 
   function onScrappingSubmit(startDate, endDate, Tags, countSliderValue) {
-    console.log(startDate);
-    console.log(endDate);
-    console.log(Tags);
-    console.log(countSliderValue);
+    getTweets(countSliderValue, startDate, endDate, Tags)
+      .then((response) => {
+        console.log(response.data);
+        setScrappingID(response.data.session_token);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function classifySubmit(path) {
-    console.log(path);
+    getInference(scrappingID, path)
+      .then((response) => {
+        setInferenceData(JSON.parse(response.data.dataframe));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
@@ -87,7 +100,7 @@ function Profile() {
         {/* Inference Table Card */}
         <Row className="mt-5 justify-content-center">
           <Col className="order-xl-3" xl="10">
-            <InferenceTable data={InferenceData}></InferenceTable>
+            <InferenceTable data={inferenceData}></InferenceTable>
           </Col>
         </Row>
       </Container>
