@@ -25,9 +25,19 @@ function Posts(props) {
     <>
       {props.posts.map((post) => (
         <tr>
-          <th scope="row">
-            <span className="mb-0 text-sm">{post.text}</span>
-          </th>
+          <td>
+            <span
+              className="mb-0 text-sm"
+              style={{
+                textOverflow: "ellipsis",
+                width: "200px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+              }}
+            >
+              {post.text}
+            </span>
+          </td>
           <td>
             <a
               href={"https://www.twiter.com/" + post.url}
@@ -37,44 +47,23 @@ function Posts(props) {
             </a>
           </td>
           <td>
-            <Badge color="" className="badge-dot mr-4">
-              <i className="bg-warning" />
-              pending
-            </Badge>
+            <span className="mb-0 text-sm">{post.prediction}</span>
           </td>
-
           <td>
-            <div className="d-flex align-items-center">
-              <span className="mr-2">60%</span>
-              <div>
-                <Progress max="100" value="60" barClassName="bg-danger" />
-              </div>
-            </div>
+            <span className="mb-0 text-sm">{post.hashtags}</span>
           </td>
-          <td className="text-right">
-            <UncontrolledDropdown>
-              <DropdownToggle
-                className="btn-icon-only text-light"
-                href="#pablo"
-                role="button"
-                size="sm"
-                color=""
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fas fa-ellipsis-v" />
-              </DropdownToggle>
-              <DropdownMenu className="dropdown-menu-arrow" right>
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Action
-                </DropdownItem>
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Another action
-                </DropdownItem>
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Something else here
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+          <td>
+            <span className="mb-0 text-sm">
+              {post.retweets ? post.retweets : 0}
+            </span>
+          </td>
+          <td>
+            <span className="mb-0 text-sm">{post.likes ? post.likes : 0}</span>
+          </td>
+          <td>
+            <span className="mb-0 text-sm">
+              {post.replies ? post.replies : 0}
+            </span>
           </td>
         </tr>
       ))}

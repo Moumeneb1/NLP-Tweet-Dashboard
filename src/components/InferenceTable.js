@@ -64,10 +64,14 @@ function InferenceTable(props) {
       <Table className="align-items-center table-flush" responsive>
         <thead className="thead-light">
           <tr>
-            <th scope="col">Tweet Text</th>
-            <th scope="col">Tweet ID</th>
+            <th scope="col">Text</th>
+            <th scope="col">ID</th>
             <th scope="col">Class</th>
-            <th scope="col">Users</th>
+            <th scope="col">Hashtags</th>
+            <th scope="col">Retweets</th>
+            <th scope="col">Likes</th>
+            <th scope="col">Replies</th>
+
             <th scope="col" />
           </tr>
         </thead>

@@ -18,6 +18,8 @@
 import React, { useState } from "react";
 import CustomDropDown from "components/DropDowns/CustomDropDown";
 import { getInference } from "api/InferenceAPI";
+import { usePromiseTracker } from "react-promise-tracker";
+import Loader from "react-loader-spinner";
 
 // reactstrap components
 import {
@@ -47,31 +49,61 @@ import Fields_models from "assets/Data/Fields_model";
 import ScrappingCard from "components/ScrappingCard";
 import ChooseModelCard from "components/ChooseModelCard";
 import InferenceData from "assets/Data/InfereceData";
+import { trackPromise } from "react-promise-tracker";
 import { getTweets } from "api/scrapAPI";
 
 function Profile() {
   const [scrappingID, setScrappingID] = useState(null);
   const [inferenceData, setInferenceData] = useState(null);
 
+  const LoadingIndicator = (props) => {
+    const { promiseInProgress } = usePromiseTracker({
+      area: props.area,
+      delay: 0,
+    });
+
+    return (
+      promiseInProgress && (
+        <div
+          style={{
+            width: "100%",
+            height: "100",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Loader type="ThreeDots" color="#6477e5" height="100" width="100" />
+        </div>
+      )
+    );
+  };
+
   function onScrappingSubmit(startDate, endDate, Tags, countSliderValue) {
-    getTweets(countSliderValue, startDate, endDate, Tags)
-      .then((response) => {
-        console.log(response.data);
-        setScrappingID(response.data.session_token);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    trackPromise(
+      getTweets(countSliderValue, startDate, endDate, Tags)
+        .then((response) => {
+          console.log(response.data);
+          setScrappingID(response.data.session_token);
+        })
+        .catch((error) => {
+          console.log(error);
+        }),
+      "scrap_area"
+    );
   }
 
   function classifySubmit(path) {
-    getInference(scrappingID, path)
-      .then((response) => {
-        setInferenceData(JSON.parse(response.data.dataframe));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    trackPromise(
+      getInference(scrappingID, path)
+        .then((response) => {
+          setInferenceData(JSON.parse(response.data.dataframe));
+        })
+        .catch((error) => {
+          console.log(error);
+        }),
+      "download_area"
+    );
   }
 
   return (
@@ -85,6 +117,7 @@ function Profile() {
             <ScrappingCard OnSubmit={onScrappingSubmit}></ScrappingCard>
           </Col>
         </Row>
+        <LoadingIndicator area="scrap_area" />
 
         {/* Choose model Card  */}
 
@@ -96,6 +129,8 @@ function Profile() {
             ></ChooseModelCard>
           </Col>
         </Row>
+
+        <LoadingIndicator area="download_area" />
 
         {/* Inference Table Card */}
         <Row className="mt-5 justify-content-center">
