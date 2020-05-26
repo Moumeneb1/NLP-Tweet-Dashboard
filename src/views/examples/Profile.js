@@ -15,31 +15,16 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomDropDown from "components/DropDowns/CustomDropDown";
-import { getInference } from "api/InferenceAPI";
+import { getInference, getFieldsModels } from "api/InferenceAPI";
 import { usePromiseTracker } from "react-promise-tracker";
 import Loader from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
-  Col,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
-  Dropdown,
-} from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import KeywordInput from "components/KeywordInput";
@@ -57,6 +42,7 @@ import { getTweets } from "api/scrapAPI";
 function Profile() {
   const [scrappingID, setScrappingID] = useState(null);
   const [inferenceData, setInferenceData] = useState(null);
+  const [fieldsModels, setFiledsModels] = useState(null);
 
   const LoadingIndicator = (props) => {
     const { promiseInProgress } = usePromiseTracker({
@@ -115,6 +101,17 @@ function Profile() {
     );
   }
 
+  useEffect(() => {
+    getFieldsModels()
+      .then((response) => {
+        setFiledsModels(response.data);
+      })
+      .then((error) => {
+        console.log(error);
+      });
+    // code to run on component mount
+  }, []);
+
   return (
     <>
       <ToastContainer />
@@ -136,7 +133,7 @@ function Profile() {
           <Row className="mt-5 justify-content-center">
             <Col className="order-xl-3" xl="10">
               <ChooseModelCard
-                Fields_models={Fields_models}
+                Fields_models={fieldsModels}
                 handleSubmit={classifySubmit}
               ></ChooseModelCard>
             </Col>

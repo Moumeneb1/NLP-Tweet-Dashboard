@@ -13,3 +13,7 @@ export function getInference(session_token, field_model_path) {
   console.log(JSON.stringify(data));
   return axios.post("http://localhost:4000/api/predict_dataframe", data);
 }
+
+export function getFieldsModels() {
+  return axios.get("http://localhost:4000/api/getmodels/");
+}
