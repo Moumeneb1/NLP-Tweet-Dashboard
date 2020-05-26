@@ -40,7 +40,7 @@ function Posts(props) {
           </td>
           <td>
             <a
-              href={"https://www.twiter.com/" + post.url}
+              href={"https://twitter.com" + post.url}
               className="badge-dot mr-4"
             >
               {post.id}

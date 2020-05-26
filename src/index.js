@@ -27,6 +27,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
+import "react-notifications/lib/notifications.css";
 
 ReactDOM.render(
   <BrowserRouter>

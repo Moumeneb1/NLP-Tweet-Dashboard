@@ -63,10 +63,13 @@
     "react-dom": "16.12.0",
     "react-google-maps": "9.4.5",
     "react-loader-spinner": "^3.1.14",
+    "react-notifications": "^1.6.0",
     "react-promise-tracker": "^2.1.0",
     "react-router-dom": "5.1.2",
     "react-scripts": "^3.4.0",
     "react-tagsinput": "^3.19.0",
+    "react-toast-notifications": "^2.4.0",
+    "react-toastify": "^6.0.5",
     "reactjs-tag-input": "^2.0.15",
     "reactstrap": "8.4.1"
   },

@@ -20,6 +20,8 @@ import CustomDropDown from "components/DropDowns/CustomDropDown";
 import { getInference } from "api/InferenceAPI";
 import { usePromiseTracker } from "react-promise-tracker";
 import Loader from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // reactstrap components
 import {
@@ -85,9 +87,15 @@ function Profile() {
         .then((response) => {
           console.log(response.data);
           setScrappingID(response.data.session_token);
+          toast(
+            "Great ! we scrapped " +
+              response.data.dataframe_length +
+              " Tweets. Let's use them for inference"
+          );
         })
         .catch((error) => {
           console.log(error);
+          toast("Backend error");
         }),
       "scrap_area"
     );
@@ -98,6 +106,7 @@ function Profile() {
       getInference(scrappingID, path)
         .then((response) => {
           setInferenceData(JSON.parse(response.data.dataframe));
+          toast("Great ! We have your data predictions !!");
         })
         .catch((error) => {
           console.log(error);
@@ -108,6 +117,8 @@ function Profile() {
 
   return (
     <>
+      <ToastContainer />
+
       <UserHeader />
       {/* Page content */}
       <Container className="mt--9" fluid>
@@ -121,23 +132,27 @@ function Profile() {
 
         {/* Choose model Card  */}
 
-        <Row className="mt-5 justify-content-center">
-          <Col className="order-xl-3" xl="10">
-            <ChooseModelCard
-              Fields_models={Fields_models}
-              handleSubmit={classifySubmit}
-            ></ChooseModelCard>
-          </Col>
-        </Row>
+        {scrappingID && (
+          <Row className="mt-5 justify-content-center">
+            <Col className="order-xl-3" xl="10">
+              <ChooseModelCard
+                Fields_models={Fields_models}
+                handleSubmit={classifySubmit}
+              ></ChooseModelCard>
+            </Col>
+          </Row>
+        )}
 
         <LoadingIndicator area="download_area" />
 
         {/* Inference Table Card */}
-        <Row className="mt-5 justify-content-center">
-          <Col className="order-xl-3" xl="10">
-            <InferenceTable data={inferenceData}></InferenceTable>
-          </Col>
-        </Row>
+        {inferenceData && (
+          <Row className="mt-5 justify-content-center">
+            <Col className="order-xl-3" xl="10">
+              <InferenceTable data={inferenceData}></InferenceTable>
+            </Col>
+          </Row>
+        )}
       </Container>
     </>
   );
