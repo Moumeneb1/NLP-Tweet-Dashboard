@@ -1,5 +1,5 @@
 import TagsInput from "react-tagsinput";
-import React, { useState } from "react";
+import React from "react";
 
 import "react-tagsinput/react-tagsinput.css"; // If using WebPack and style-loader.
 

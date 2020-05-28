@@ -2,35 +2,14 @@ import React, { useEffect, useState } from "react";
 import Posts from "components/Posts";
 
 // reactstrap components
-import {
-  Badge,
-  Card,
-  CardHeader,
-  CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
-  Table,
-  Container,
-  Row,
-  Col,
-  Button,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { Card, CardHeader, CardFooter, Table, Row, Col } from "reactstrap";
 // core components
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 import Paginations from "./Paginations";
 
 function InferenceTable(props) {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(7);
 

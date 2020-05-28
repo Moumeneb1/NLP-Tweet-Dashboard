@@ -1,5 +1,5 @@
 import { DateRange } from "react-date-range";
-import React, { useState } from "react";
+import React from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 

@@ -18,38 +18,33 @@
 import React from "react";
 
 // reactstrap components
-import { Button, Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
-class UserHeader extends React.Component {
-  render() {
-    return (
-      <>
-        <div
-          className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-          style={{
-            minHeight: "400px",
-            backgroundSize: "cover",
-            backgroundPosition: "center top",
-          }}
-        >
-          {/* Mask */}
-          <span className="mask bg-gradient-default opacity-8" />
-          {/* Header container */}
-          <Container className="d-flex align-items-center" fluid>
-            <Row>
-              <Col lg="5" md="10">
-                <h1 className="display-2 text-white">Online Mode</h1>
-                <p className="text-white mt-0 mb-5">
-                  Search for tweets using certain words and tags for scrapping
-                  and classification using our pretrained models
-                </p>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      </>
-    );
-  }
+function UserHeader(props) {
+  return (
+    <>
+      <div
+        className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+        style={{
+          minHeight: "400px",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      >
+        {/* Mask */}
+        <span className="mask bg-gradient-default opacity-8" />
+        {/* Header container */}
+        <Container className="d-flex align-items-center" fluid>
+          <Row>
+            <Col lg="5" md="10">
+              <h1 className="display-2 text-white">Online Mode</h1>
+              <p className="text-white mt-0 mb-5">{props.text}</p>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </>
+  );
 }
 
 export default UserHeader;

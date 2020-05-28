@@ -25,14 +25,8 @@ import {
   CardBody,
   FormGroup,
   Form,
-  Input,
-  Container,
   Row,
   Col,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
-  Dropdown,
 } from "reactstrap";
 // core components
 

@@ -1,17 +1,7 @@
-import React, { useState } from "react";
-import CustomDropDown from "components/DropDowns/CustomDropDown";
+import React from "react";
 
 // reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Input,
-  Row,
-  Col,
-} from "reactstrap";
+import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 // core components
 
 function ClassificationResult(props) {

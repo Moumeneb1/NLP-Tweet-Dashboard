@@ -1,5 +1,5 @@
-import OfflineMode from "views/Index.js";
-import OnlineMode from "views/examples/OnlineMode";
+import OfflineMode from "views/OfflineMode.js";
+import OnlineMode from "views/OnlineMode";
 
 var routes = [
   {
