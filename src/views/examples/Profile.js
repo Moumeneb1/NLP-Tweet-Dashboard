@@ -24,7 +24,20 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  NavItem,
+  NavLink,
+  Nav,
+} from "reactstrap";
+
+import { Line, Bar } from "react-chartjs-2";
+
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import KeywordInput from "components/KeywordInput";
@@ -38,11 +51,28 @@ import ChooseModelCard from "components/ChooseModelCard";
 import InferenceData from "assets/Data/InfereceData";
 import { trackPromise } from "react-promise-tracker";
 import { getTweets } from "api/scrapAPI";
+import {
+  chartOptions,
+  parseOptions,
+  chartExample1,
+  chartExample2,
+} from "variables/charts.js";
+import SummaryPie from "components/Common/SummaryPie";
+
+const data = {
+  labels: ["Red", "Blue", "Yellow"],
+  datasets: [
+    {
+      data: [300, 50, 100],
+    },
+  ],
+};
 
 function Profile() {
   const [scrappingID, setScrappingID] = useState(null);
   const [inferenceData, setInferenceData] = useState(null);
   const [fieldsModels, setFiledsModels] = useState(null);
+  const [summarydata, setSummaryData] = useState(null);
 
   const LoadingIndicator = (props) => {
     const { promiseInProgress } = usePromiseTracker({
@@ -93,6 +123,8 @@ function Profile() {
         .then((response) => {
           setInferenceData(JSON.parse(response.data.dataframe));
           toast("Great ! We have your data predictions !!");
+          setSummaryData(JSON.parse(response.data.summary));
+          console.log(response.data.summary);
         })
         .catch((error) => {
           console.log(error);
@@ -150,6 +182,12 @@ function Profile() {
             </Col>
           </Row>
         )}
+
+        <Row className="mt-5  justify-content-center">
+          <Col className=" order-xl-3" xl="5">
+            {summarydata && <SummaryPie data={summarydata}></SummaryPie>}
+          </Col>
+        </Row>
       </Container>
     </>
   );
