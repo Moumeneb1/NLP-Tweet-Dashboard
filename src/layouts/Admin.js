@@ -20,7 +20,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
@@ -34,7 +33,7 @@ class Admin extends React.Component {
   }
   getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/inference") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -66,15 +65,15 @@ class Admin extends React.Component {
           {...this.props}
           routes={routes}
           logo={{
-            innerLink: "/admin/index",
-            imgSrc: require("assets/img/brand/argon-react.png"),
+            innerLink: "/inference/index",
+            imgSrc: require("assets/img/brand/IRIT_logo.png"),
             imgAlt: "...",
           }}
         />
         <div className="main-content" ref="mainContent">
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="*" to="/admin/index" />
+            <Redirect from="*" to="/inference/online-mode" />
           </Switch>
           <Container fluid>
             <AdminFooter />

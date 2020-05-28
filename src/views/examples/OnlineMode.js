@@ -68,7 +68,7 @@ const data = {
   ],
 };
 
-function Profile() {
+function OnlineMode() {
   const [scrappingID, setScrappingID] = useState(null);
   const [inferenceData, setInferenceData] = useState(null);
   const [fieldsModels, setFiledsModels] = useState(null);
@@ -193,4 +193,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default OnlineMode;
