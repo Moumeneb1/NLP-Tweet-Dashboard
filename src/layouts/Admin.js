@@ -22,6 +22,7 @@ import { Container } from "reactstrap";
 // core components
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import logo from "./../assets/img/brand/IRIT_logo.png";
 
 import routes from "routes.js";
 
@@ -66,7 +67,7 @@ class Admin extends React.Component {
           routes={routes}
           logo={{
             innerLink: "/inference/index",
-            imgSrc: require("assets/img/brand/IRIT_logo.png"),
+            imgSrc: logo,
             imgAlt: "...",
           }}
         />

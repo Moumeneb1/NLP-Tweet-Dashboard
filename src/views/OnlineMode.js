@@ -13,6 +13,7 @@ import UserHeader from "components/Headers/UserHeader.js";
 import InferenceTable from "components/InferenceTable";
 import ScrappingCard from "components/ScrappingCard";
 import ChooseModelCard from "components/ChooseModelCard";
+import ChooseFieldCard from "components/ChooseFieldCard";
 import { trackPromise } from "react-promise-tracker";
 import { getTweets } from "api/scrapAPI";
 
@@ -21,7 +22,10 @@ import SummaryPie from "components/Common/SummaryPie";
 function OnlineMode() {
   const [scrappingID, setScrappingID] = useState(null);
   const [inferenceData, setInferenceData] = useState(null);
-  const [fieldsModels, setFiledsModels] = useState(null);
+  const [fields, setFields] = useState(null);
+  const [fieldsAndModels, setFieldsAndModels] = useState(null);
+  const [currentField, setCurrentField] = useState(null);
+  const [classifTasks, setClassifTasks] = useState(null);
   const [summarydata, setSummaryData] = useState(null);
   const onlineHeaderText =
     " Search for tweets using certain words and tags for scrapping and \nclassification using our pretrained models";
@@ -48,6 +52,12 @@ function OnlineMode() {
       )
     );
   };
+
+  function chooseField(field) {
+    setCurrentField(field);
+    console.log(field);
+    setClassifTasks(fieldsAndModels[field]);
+  }
 
   function onScrappingSubmit(startDate, endDate, Tags, countSliderValue) {
     trackPromise(
@@ -88,7 +98,16 @@ function OnlineMode() {
   useEffect(() => {
     getFieldsModels()
       .then((response) => {
-        setFiledsModels(response.data);
+        console.log(
+          Object.values(response.data[Object.keys(response.data)[0]])
+        );
+        console.log(response.data[Object.keys(response.data)[0]]);
+        setFields(Object.keys(response.data));
+        setCurrentField(Object.keys(response.data)[0]);
+        setClassifTasks(
+          Object.values(response.data[Object.keys(response.data)[0]])
+        );
+        setFieldsAndModels(response.data);
       })
       .then((error) => {
         console.log(error);
@@ -116,8 +135,19 @@ function OnlineMode() {
         {scrappingID && (
           <Row className="mt-5 justify-content-center">
             <Col className="order-xl-3" xl="10">
+              <ChooseFieldCard
+                fields={fields}
+                handleSubmit={chooseField}
+              ></ChooseFieldCard>
+            </Col>
+          </Row>
+        )}
+
+        {scrappingID && classifTasks && (
+          <Row className="mt-5 justify-content-center">
+            <Col className="order-xl-3" xl="10">
               <ChooseModelCard
-                Fields_models={fieldsModels}
+                Fields_models={classifTasks}
                 handleSubmit={classifySubmit}
               ></ChooseModelCard>
             </Col>

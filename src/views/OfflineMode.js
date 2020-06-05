@@ -14,6 +14,7 @@ import ClassifyTextWithModel from "components/ClassifyTextWithModel";
 import { trackPromise } from "react-promise-tracker";
 import { getInferenceText } from "api/InferenceAPI";
 import ClassificationResult from "components/ClassificationResult";
+import ChooseFieldCard from "components/ChooseFieldCard";
 
 function OfflineMode() {
   const [inferenceData, setInferenceData] = useState(null);
@@ -43,6 +44,18 @@ function OfflineMode() {
     );
   };
 
+  const [fields, setFields] = useState(null);
+  const [fieldsAndModels, setFieldsAndModels] = useState(null);
+  const [currentField, setCurrentField] = useState(null);
+  const [classifTasks, setClassifTasks] = useState(null);
+  const [summarydata, setSummaryData] = useState(null);
+
+  function chooseField(field) {
+    setCurrentField(field);
+    console.log(field);
+    setClassifTasks(fieldsAndModels[field]);
+  }
+
   function classifySubmit(path, text) {
     console.log(inferenceData);
 
@@ -63,8 +76,16 @@ function OfflineMode() {
   useEffect(() => {
     getFieldsNoFeaturesModels()
       .then((response) => {
-        setFiledsModels(response.data);
-        console.log(fieldsModels);
+        console.log(
+          Object.values(response.data[Object.keys(response.data)[0]])
+        );
+        console.log(response.data[Object.keys(response.data)[0]]);
+        setFields(Object.keys(response.data));
+        setCurrentField(Object.keys(response.data)[0]);
+        setClassifTasks(
+          Object.values(response.data[Object.keys(response.data)[0]])
+        );
+        setFieldsAndModels(response.data);
       })
       .then((error) => {
         console.log(error);
@@ -80,12 +101,22 @@ function OfflineMode() {
       {/* Page content */}
       <Container className="mt--9" fluid>
         {/* Scrapping Card  */}
+        {
+          <Row className="mt-5 justify-content-center">
+            <Col className="order-xl-3" xl="10">
+              <ChooseFieldCard
+                fields={fields}
+                handleSubmit={chooseField}
+              ></ChooseFieldCard>
+            </Col>
+          </Row>
+        }
         {/* Choose model Card  */}(
-        {fieldsModels && (
+        {classifTasks && (
           <Row className="mt-5 justify-content-center">
             <Col className="order-xl-3" xl="10">
               <ClassifyTextWithModel
-                Fields_models={fieldsModels}
+                Fields_models={classifTasks}
                 handleSubmit={classifySubmit}
               ></ClassifyTextWithModel>
             </Col>

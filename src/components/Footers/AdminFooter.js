@@ -54,7 +54,7 @@ class Footer extends React.Component {
 
               <NavItem>
                 <NavLink
-                  href="http://blog.creative-tim.com?ref=adr-admin-footer"
+                  href="https://medium.com/@fa_boumadane"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -64,7 +64,7 @@ class Footer extends React.Component {
 
               <NavItem>
                 <NavLink
-                  href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md?ref=adr-admin-footer"
+                  href="https://github.com/Moumeneb1/IRIT_TEXT_Backend"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
