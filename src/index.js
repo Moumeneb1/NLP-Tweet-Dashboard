@@ -12,10 +12,9 @@ import AdminLayout from "layouts/Admin.js";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Switch>
-      <Route path="/" render={(props) => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/inference/online-mode" />
-    </Switch>
+    <Route path="/">
+      <AdminLayout />
+    </Route>
   </BrowserRouter>,
   document.getElementById("root")
 );
