@@ -50,7 +50,6 @@ function CustomDropdown(props) {
           {props.fields.map((fieled) => {
             return (
               <DropdownItem
-                rightIcon={<CaretIcon />}
                 goToMenu={fieled.name}
                 children={fieled.name}
                 handle_click={handleClick}
