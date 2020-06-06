@@ -20,7 +20,7 @@ function OfflineMode() {
   const [inferenceData, setInferenceData] = useState(null);
   const [fieldsModels, setFiledsModels] = useState(null);
   const offlineHeaderText =
-    "Classify a text You submit using our pretrained models !";
+    "Classify a text you submit using our pretrained models !";
   const LoadingIndicator = (props) => {
     const { promiseInProgress } = usePromiseTracker({
       area: props.area,
@@ -43,6 +43,7 @@ function OfflineMode() {
       )
     );
   };
+  const webTitle = "Offline mode";
 
   const [fields, setFields] = useState(null);
   const [fieldsAndModels, setFieldsAndModels] = useState(null);
@@ -97,7 +98,7 @@ function OfflineMode() {
     <>
       <ToastContainer />
 
-      <UserHeader text={offlineHeaderText} />
+      <UserHeader text={offlineHeaderText} title={webTitle} />
       {/* Page content */}
       <Container className="mt--9" fluid>
         {/* Scrapping Card  */}

@@ -37,7 +37,7 @@ function UserHeader(props) {
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="5" md="10">
-              <h1 className="display-2 text-white">Online Mode</h1>
+              <h1 className="display-2 text-white">{props.title}</h1>
               <p className="text-white mt-0 mb-5">{props.text}</p>
             </Col>
           </Row>

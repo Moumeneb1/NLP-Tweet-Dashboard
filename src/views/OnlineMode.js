@@ -30,6 +30,7 @@ function OnlineMode() {
   const onlineHeaderText =
     " Search for tweets using certain words and tags for scrapping and \nclassification using our pretrained models";
 
+  const webTitle = "Online mode";
   const LoadingIndicator = (props) => {
     const { promiseInProgress } = usePromiseTracker({
       area: props.area,
@@ -119,7 +120,7 @@ function OnlineMode() {
     <>
       <ToastContainer />
 
-      <UserHeader text={onlineHeaderText} />
+      <UserHeader text={onlineHeaderText} title={webTitle} />
       {/* Page content */}
       <Container className="mt--9" fluid>
         {/* Scrapping Card  */}
